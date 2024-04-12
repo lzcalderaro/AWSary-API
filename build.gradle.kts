@@ -11,6 +11,28 @@ plugins {
 group = "com.awsary"
 version = "0.0.1"
 
+ktor {
+    docker {
+        jreVersion.set(JavaVersion.VERSION_17)
+        localImageName.set("awsary-docker-image")
+        imageTag.set("0.0.1-preview")
+        portMappings.set(listOf(
+            io.ktor.plugin.features.DockerPortMapping(
+                80,
+                8080,
+                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+            )
+        ))
+        externalRegistry.set(
+            io.ktor.plugin.features.DockerImageRegistry.dockerHub(
+                appName = provider { "ktor-app" },
+                username = providers.environmentVariable("DOCKER_HUB_USERNAME"),
+                password = providers.environmentVariable("DOCKER_HUB_PASSWORD")
+            )
+        )
+    }
+}
+
 application {
     mainClass.set("com.awsary.ApplicationKt")
 
@@ -34,4 +56,6 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("aws.sdk.kotlin:dynamodb:1.0.0")
+    implementation("aws.sdk.kotlin:s3:1.0.0")
 }
