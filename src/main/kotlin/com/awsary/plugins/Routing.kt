@@ -61,7 +61,9 @@ fun Route.awsItemsRouting() {
 
             try {
                 val item = dataBase.getItem(id)
-                call.respond(HttpStatusCode.OK, item)
+                item?.let {
+                    call.respond(HttpStatusCode.OK, item)
+                }
             } catch (e: Exception) {
                 println(e)
             }
