@@ -25,13 +25,10 @@ fun Application.configureRouting() {
             try {
                 val dataBase = Database()
                 val items = dataBase.getItems()
-
                 call.respond(HttpStatusCode.OK, items)
             } catch (e: Exception) {
-                println(e)
+                call.respond(HttpStatusCode.InternalServerError, e)
             }
-
-            call.respondText("HI")
         }
     }
 }
@@ -46,7 +43,7 @@ fun Route.awsItemsRouting() {
                 val items = dataBase.getItems()
                 call.respond(HttpStatusCode.OK, items)
             } catch (e: Exception) {
-                println(e)
+                call.respond(HttpStatusCode.InternalServerError, e)
             }
         }
         get("{id?}") {
@@ -62,7 +59,7 @@ fun Route.awsItemsRouting() {
                     call.respond(HttpStatusCode.OK, item)
                 }
             } catch (e: Exception) {
-                println(e)
+                call.respond(HttpStatusCode.InternalServerError, e)
             }
         }
     }
