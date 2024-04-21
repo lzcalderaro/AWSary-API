@@ -20,14 +20,14 @@ fun Application.configureRouting() {
     routing {
         openAPI(path = "openapi")
         awsItemsRouting()
-        get("/") {
-            try {
-                val dataBase = Database()
-                val items = dataBase.getItems()
-                call.respond(HttpStatusCode.OK, items)
-            } catch (e: Exception) {
-                call.respond(HttpStatusCode.InternalServerError, e)
-            }
+        defaultRouting()
+    }
+}
+
+fun Route.defaultRouting() {
+    route("/"){
+        get {
+            call.respond(HttpStatusCode.OK, "Hello I am on")
         }
     }
 }
