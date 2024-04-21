@@ -15,20 +15,6 @@
                 }
             ],
             "essential": true,
-            "environment": [
-                {
-                    "name": "AWS_DEFAULT_REGION",
-                    "value": "us-east-1"
-                },
-                {
-                    "name": "AWS_ACCESS_KEY_ID",
-                    "value": "AKIASXJUGVGRTY3Q5D5W"
-                },
-                {
-                    "name": "AWS_SECRET_ACCESS_KEY",
-                    "value": "7vwE013LVzTz/OQdQ3yc0S3N4b1a4vJ7XkWkv489"
-                }
-            ],
             "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],

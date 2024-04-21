@@ -21,7 +21,6 @@ fun Application.configureRouting() {
         openAPI(path = "openapi")
         awsItemsRouting()
         get("/") {
-
             try {
                 val dataBase = Database()
                 val items = dataBase.getItems()
